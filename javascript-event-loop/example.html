@@ -1,0 +1,46 @@
+<html>
+
+</html>
+<script>
+console.log('Script start');
+
+// 宏任務
+setTimeout(() => {
+  // 這是一個宏任務
+  console.log('setTimeout 1');
+}, 0);
+
+// 微任務
+Promise.resolve().then(() => {
+  // 這是一個微任務
+  console.log('Promise 1');
+});
+
+Promise.resolve().then(() => {
+  // 這是一個微任務
+  console.log('Promise 2');
+});
+
+console.log('Script end');
+
+// 宏任務
+setTimeout(() => {
+  // 這是一個宏任務
+  console.log('setTimeout 2');
+}, 0);
+
+document.body.style = 'background:blue';
+console.log(1);
+setTimeout(function test2() {
+  console.log(5)
+  document.body.style = 'background:red';
+}, 0)
+Promise.resolve().then(function test3() {
+  console.log(2);
+  document.body.style = 'background:black';
+}).then(function test4(){
+  console.log(4);
+  document.body.style = 'background:yellow';
+});
+console.log(3);
+</script>
